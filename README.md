@@ -12,10 +12,6 @@
 - [Background](#background)
   - [Modules that implement the interface](#modules-that-implement-the-interface)
   - [Badge](#badge)
-- [Install](#install)
-- [Usage](#usage)
-  - [Node.js](#nodejs)
-  - [Go](#go)
 - [API](#api)
 - [Contribute](#contribute)
   - [Want to hack on IPFS?](#want-to-hack-on-ipfs)
@@ -27,65 +23,62 @@ The primary goal of this module is to define an interface that IPLD formats can 
 
 ### Modules that implement the interface
 
-- **WIP** [JavaScript IPFS implementation](https://github.com/ipfs/js-ipfs)
-- **WIP** [JavaScript ipfs-api](https://github.com/ipfs/js-ipfs-api)
-- Soon, go-ipfs, go-ipfs-api, java-ipfs-api, python-ipfs-api and others will implement it as well.
+- [JavaScript ipld-dag-pb](https://github.com/ipld/js-ipld-dag-pb)
+- [JavaScript ipld-dag-cbor](https://github.com/ipld/js-ipld-dag-cbor)
+- [JavaScript ipld-eth-block](https://github.com/ipld/js-ipld-eth-block)
 
 Send in a PR if you find or write one!
 
 ### Badge
 
-Include this badge in your readme if you make a new module that implements
-interface-ipfs-core API.
+Include this badge in your readme if you make a new module that implements interface-ipld-format API.
 
 ![](/img/badge.png)
 
-## Install
-
-In JavaScript land:
-```js
-npm install interface-ipfs-core
-```
-
-In Go land:
-
-```go
-# Not available
-```
-
-## Usage
-
-### Node.js
-
-Install `interface-ipfs-core` as one of the dependencies of your project and as a test file. Then, using `mocha` (for Node.js) or a test runner with compatible API, do:
-
-```
-var test = require('interface-ipfs-core')
-
-var common = {
-  setup: function (cb) {
-    cb(null, yourIPFSInstance)
-  },
-  teardown: function (cb) {
-    cb()
-  }
-}
-
-// use all of the test suits
-test.all(common)
-```
-
-### Go
-
-> WIP
-
 ## API
 
-A valid (read: that follows this interface) IPFS core implementation must expose the API described in [/API](/API).
+A valid (read: that follows this interface) IPLD format implementation the following API.
+
+**Table of contents:**
+
+- IPLD format utils - Necessary by the main resolver
+  - `util.serialize`
+  - `util.deserialize`
+  - `util.cid`
+- Local resolver methods - the block level resolver (knows how to resolve paths at the block scope)
+  - `resolver.resolve`
+  - `resolver.tree`
+
+### IPLD format utils
+
+#### `binaryBlob = util.serialize(dagNode)`
+
+> returns a serialized version of this instance
+
+#### `dagNode = util.deserialize(binaryBlob)`
+
+> deserializes a binary blob into the instance
+
+#### `cid = util.cid(dagNode)`
+
+> returns the CID of the dagNode
+
+### Local resolver methods
+
+#### `{ value: <>, remainderPath: <> } = resolver.resolve(binaryBlob, path)`
+
+> resolves a path in block, returns the value and or a link and the partial missing path. This way the IPLD Resolver can fetch the link and continue to resolve.
+
+#### `[ { path: value } ...] = resolver.tree(binaryBlob[, options])`
+
+> returns all the paths available in this block.
+
+Options include:
+  - level: 0 to n - how many levels deep should the traversal go.
 
 ## Contribute
 
-Feel free to join in. All welcome. Open an [issue](https://github.com/ipfs/interface-ipfs-core/issues)!
+Feel free to join in. All welcome. Open an [issue](https://github.com/ipld/interface-ipld-format/issues)!
 
 This repository falls under the IPFS [Code of Conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md).
 
