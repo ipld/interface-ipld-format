@@ -51,30 +51,44 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 ### IPLD format utils
 
-#### `binaryBlob = util.serialize(dagNode)`
+#### `util.serialize(dagNode, callback)`
 
-> returns a serialized version of this instance
+> serializes a dagNode of an IPLD format into its binary format
 
-#### `dagNode = util.deserialize(binaryBlob)`
+`callback` must have the signature `function (err, binaryBlob)`, where `err` is an Error is the function fails and `binaryBlob` is a Buffer containing the serialized version.
+
+#### `util.deserialize(binaryBlob, callback)`
 
 > deserializes a binary blob into the instance
 
-#### `cid = util.cid(dagNode)`
+`callback` must have the signature `function (err, dagNode)`, where `err` is an Error if the function fails and `dagNode` is the dagNode that got deserialized in the process.
 
-> returns the CID of the dagNode
+
+#### `util.cid(dagNode, callback)`
+
+> get the CID of the dagNode
+
+`callback` must have the signature `function (err, cid)`, where `err` is an Error is the function fails and `cid` is a CID instance of the dagNode.
 
 ### Local resolver methods
 
-#### `{ value: <>, remainderPath: <> } = resolver.resolve(binaryBlob, path)`
+#### `resolver.resolve(binaryBlob, path, callback)`
 
 > resolves a path in block, returns the value and or a link and the partial missing path. This way the IPLD Resolver can fetch the link and continue to resolve.
 
-#### `[ { path: value } ...] = resolver.tree(binaryBlob[, options])`
+`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an object with the following keys:
+
+- value: <> - The value resolved or an IPLD link if it was unable to resolve it through.
+- remainderPath: <> - The remaining path that was not resolved under block scope.
+
+#### `resolver.tree(binaryBlob[, options], callback)`
 
 > returns all the paths available in this block.
 
 Options include:
   - level: 0 to n - how many levels deep should the traversal go.
+
+`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`
 
 ## Contribute
 
