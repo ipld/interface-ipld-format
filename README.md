@@ -87,6 +87,7 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 Options include:
   - level: 0 to n - how many levels deep should the traversal go.
+  - values: bool - resolve the values (defaults to false)
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`
 
