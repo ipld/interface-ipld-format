@@ -13,6 +13,14 @@
   - [Modules that implement the interface](#modules-that-implement-the-interface)
   - [Badge](#badge)
 - [API](#api)
+  - [IPLD format utils](#ipld-format-utils)
+    - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
+    - [`util.deserialize(binaryBlob, callback)`](#utildeserializebinaryblob-callback)
+    - [`util.cid(dagNode, callback)`](#utilciddagnode-callback)
+  - [Local resolver methods](#local-resolver-methods)
+    - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
+    - [`resolver.tree(binaryBlob[, options], callback)`](#resolvertreebinaryblob-options-callback)
+- [Maintainers](#maintainers)
 - [Contribute](#contribute)
   - [Want to hack on IPFS?](#want-to-hack-on-ipfs)
 - [License](#license)
@@ -91,11 +99,17 @@ Options include:
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`
 
+## Maintainers
+
+Captain: [@diasdavid](https://github.com/diasdavid).
+
 ## Contribute
 
 Feel free to join in. All welcome. Open an [issue](https://github.com/ipld/interface-ipld-format/issues)!
 
-This repository falls under the IPFS [Code of Conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md).
+Check out our [contributing document](https://github.com/ipld/ipld/blob/master/contributing.md) for more information on how we work, and about contributing in general. Please be aware that all interactions related to IPLD are subject to the IPFS [Code of Conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md).
+
+Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
 ### Want to hack on IPFS?
 
@@ -103,6 +117,6 @@ This repository falls under the IPFS [Code of Conduct](https://github.com/ipfs/c
 
 ## License
 
-MIT
+This repository is only for documents. These are licensed under a [CC-BY 3.0 Unported](LICENSE) License © 2016 Protocol Labs Inc. Any code is licensed under a [MIT](MIT-LICENSE) © 2016 Protocol Labs Inc.
 
 [UnixFS]: https://github.com/ipfs/specs/tree/master/unixfs
