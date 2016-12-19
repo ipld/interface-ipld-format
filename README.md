@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](http://ipn.io)
 [![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg?style=flat-square)](http://webchat.freenode.net/?channels=%23ipfs)
-[![](https://img.shields.io/badge/project-IPFS-blue.svg?style=flat-square)](http://ipfs.io/)
+[![](https://img.shields.io/badge/project-IPLD-blue.svg?style=flat-square)](http://github.com/ipld/ipld)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 > A interface you can follow to implement a valid IPLD format, resolvable through the IPLD Resolver (available in IPFS)
@@ -13,8 +13,15 @@
   - [Modules that implement the interface](#modules-that-implement-the-interface)
   - [Badge](#badge)
 - [API](#api)
+  - [IPLD format utils](#ipld-format-utils)
+    - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
+    - [`util.deserialize(binaryBlob, callback)`](#utildeserializebinaryblob-callback)
+    - [`util.cid(dagNode, callback)`](#utilciddagnode-callback)
+  - [Local resolver methods](#local-resolver-methods)
+    - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
+    - [`resolver.tree(binaryBlob[, options], callback)`](#resolvertreebinaryblob-options-callback)
+- [Maintainers](#maintainers)
 - [Contribute](#contribute)
-  - [Want to hack on IPFS?](#want-to-hack-on-ipfs)
 - [License](#license)
 
 ## Background
@@ -91,18 +98,20 @@ Options include:
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`
 
+## Maintainers
+
+Captain: [@diasdavid](https://github.com/diasdavid).
+
 ## Contribute
 
 Feel free to join in. All welcome. Open an [issue](https://github.com/ipld/interface-ipld-format/issues)!
 
-This repository falls under the IPFS [Code of Conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md).
+Check out our [contributing document](https://github.com/ipld/ipld/blob/master/contributing.md) for more information on how we work, and about contributing in general. Please be aware that all interactions related to IPLD are subject to the IPFS [Code of Conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md).
 
-### Want to hack on IPFS?
-
-[![](https://cdn.rawgit.com/jbenet/contribute-ipfs-gif/master/img/contribute.gif)](https://github.com/ipfs/community/blob/master/contributing.md)
+Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
 ## License
 
-MIT
+This repository is only for documents. These are licensed under a [CC-BY 3.0 Unported](LICENSE) License © 2016 Protocol Labs Inc. Any code is licensed under a [MIT](MIT-LICENSE) © 2016 Protocol Labs Inc.
 
 [UnixFS]: https://github.com/ipfs/specs/tree/master/unixfs
