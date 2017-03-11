@@ -99,11 +99,17 @@ Options include:
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`
 
-#### `resolver.isCID(binaryBlob, path, callback)`
+#### `resolver.isLink(binaryBlob, path, callback)`
 
-> returns the CID of a given path, if it is a valid CID, false otherwise.
+> returns an IPLD Link of a given path, if it is a valid link, false otherwise.
 
-`callback` must have the signature `function (err, cid)`, where `err` is an Error if the function fails and `cid` is the CID that was in a given path.
+`callback` must have the signature `function (err, link)`, where `err` is an Error if the function fails and `link` is the CID that was in a given path. `link` follows the format:
+
+```JavaScript
+{
+  '/': <cid>
+}
+```
 
 ## Maintainers
 
