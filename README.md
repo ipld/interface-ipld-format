@@ -33,6 +33,8 @@ The primary goal of this module is to define an interface that IPLD formats can 
 - [JavaScript ipld-dag-pb](https://github.com/ipld/js-ipld-dag-pb)
 - [JavaScript ipld-dag-cbor](https://github.com/ipld/js-ipld-dag-cbor)
 - [JavaScript ipld-eth-block](https://github.com/ipld/js-ipld-eth-block)
+- [JavaScript ipld-eth-tx](https://github.com/ipld/js-ipld-eth-tx)
+- [JavaScript ipld-bencode](https://github.com/ipld/js-ipld-bencode)
 
 Send in a PR if you find or write one!
 
@@ -70,7 +72,6 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 `callback` must have the signature `function (err, dagNode)`, where `err` is an Error if the function fails and `dagNode` is the dagNode that got deserialized in the process.
 
-
 #### `util.cid(dagNode, callback)`
 
 > get the CID of the dagNode
@@ -97,6 +98,18 @@ Options include:
   - values: bool - resolve the values (defaults to false)
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`
+
+#### `resolver.isLink(binaryBlob, path, callback)`
+
+> returns an IPLD Link of a given path, if it is a valid link, false otherwise.
+
+`callback` must have the signature `function (err, link)`, where `err` is an Error if the function fails and `link` is the CID that was in a given path. `link` follows the format:
+
+```JavaScript
+{
+  '/': <cid>
+}
+```
 
 ## Maintainers
 
