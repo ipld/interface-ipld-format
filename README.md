@@ -72,9 +72,9 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 `callback` must have the signature `function (err, dagNode)`, where `err` is an Error if the function fails and `dagNode` is the dagNode that got deserialized in the process.
 
-#### `util.cid(dagNode, callback)`
+#### `util.cid(serializedNode, callback)`
 
-> get the CID of the dagNode
+> get the CID of the serialized dagNode
 
 `callback` must have the signature `function (err, cid)`, where `err` is an Error is the function fails and `cid` is a CID instance of the dagNode.
 
