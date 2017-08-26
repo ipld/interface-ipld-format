@@ -1,0 +1,30 @@
+{
+  "name": "interface-ipld-format",
+  "version": "0.0.0",
+  "description": "A interface you can follow to implement a valid IPLD format, resolvable through the IPLD Resolver (available in IPFS)",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "exit(0)",
+    "lint": "aegir-lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipld/interface-ipld-format.git"
+  },
+  "keywords": [
+    "ipld"
+  ],
+  "author": "David Dias <daviddias@ipfs.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ipld/interface-ipld-format/issues"
+  },
+  "homepage": "https://github.com/ipld/interface-ipld-format#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "aegir": "^11.0.2"
+  },
+  "contributors": [
+    "David Dias <daviddias.p@gmail.com>"
+  ]
+}
