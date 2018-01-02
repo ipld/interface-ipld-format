@@ -33,8 +33,7 @@ The primary goal of this module is to define an interface that IPLD formats can 
 
 - [JavaScript ipld-dag-pb](https://github.com/ipld/js-ipld-dag-pb)
 - [JavaScript ipld-dag-cbor](https://github.com/ipld/js-ipld-dag-cbor)
-- [JavaScript ipld-eth-block](https://github.com/ipld/js-ipld-eth-block)
-- [JavaScript ipld-eth-tx](https://github.com/ipld/js-ipld-eth-tx)
+- [JavaScript ipld-ethereum](https://github.com/ipld/js-ipld-ethereum)
 - [JavaScript ipld-bencode](https://github.com/ipld/js-ipld-bencode)
 
 Send in a PR if you find or write one!
