@@ -12,6 +12,7 @@
 - [Background](#background)
   - [Modules that implement the interface](#modules-that-implement-the-interface)
   - [Badge](#badge)
+- [Definitions](#definitions)
 - [API](#api)
   - [IPLD format utils](#ipld-format-utils)
     - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
@@ -43,6 +44,10 @@ Send in a PR if you find or write one!
 Include this badge in your readme if you make a new module that implements interface-ipld-format API.
 
 ![](/img/badge.png)
+
+## Definitions
+
+- **dagNode**: The implementation specific representation of a deserialized block.
 
 ## API
 
