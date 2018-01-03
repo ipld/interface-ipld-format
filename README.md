@@ -17,7 +17,10 @@
   - [IPLD format utils](#ipld-format-utils)
     - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
     - [`util.deserialize(binaryBlob, callback)`](#utildeserializebinaryblob-callback)
-    - [`util.cid(dagNode, callback)`](#utilciddagnode-callback)
+    - [`util.cid(dagNode[, options], callback)`](#utilciddagnode-callback)
+    - [`util.cidSerialized(binaryBlob[, options], callback)`](#utilcidserializeddagnode-callback)
+    - [`util.copy(dagNode, callback)`](#utilcopydagnode-callback)
+    - [`util.toJSON(dagNode, callback)`](#utiltojsondagnode-callback)
   - [Local resolver methods](#local-resolver-methods)
     - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
     - [`resolver.tree(binaryBlob[, options], callback)`](#resolvertreebinaryblob-options-callback)
@@ -52,16 +55,6 @@ Include this badge in your readme if you make a new module that implements inter
 
 A valid (read: that follows this interface) IPLD format implementation the following API.
 
-**Table of contents:**
-
-- IPLD format utils - Necessary by the main resolver
-  - `util.serialize`
-  - `util.deserialize`
-  - `util.cid`
-- Local resolver methods - the block level resolver (knows how to resolve paths at the block scope)
-  - `resolver.resolve`
-  - `resolver.tree`
-
 ### IPLD format utils
 
 #### `util.serialize(dagNode, callback)`
@@ -76,11 +69,39 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 `callback` must have the signature `function (err, dagNode)`, where `err` is an Error if the function fails and `dagNode` is the dagNode that got deserialized in the process.
 
-#### `util.cid(dagNode, callback)`
+#### `util.cid(dagNode[, options], callback)`
 
 > get the CID of the dagNode
 
+Options include:
+  - version - the CID version to be used (defaults to 1)
+  - hashAlg - the hash algorithm to be used (default to the one set by the format)
+
 `callback` must have the signature `function (err, cid)`, where `err` is an Error is the function fails and `cid` is a CID instance of the dagNode.
+
+#### `util.cidSerialized(binaryBlob[, options], callback)`
+
+> get the CID of the serialized dagNode
+
+Options include:
+  - version - the CID version to be used (defaults to 1)
+  - hashAlg - the hash algorithm to be used (default to the one set by the format)
+
+`callback` must have the signature `function (err, cid)`, where `err` is an Error is the function fails and `cid` is a CID instance of the dagNode.
+
+#### `util.copy(dagNode, callback)`
+
+> return a copy of the dagNode
+
+`callback` must have the signature `function (err, dagNodeCopy)`, where `err` is an Error is the function fails and `dagNodeCopy` is a copy of the dagNode.
+
+#### `util.toJSON(dagNode, , callback)`
+
+> return a JSON representation of the dagNode
+
+`callback` must have the signature `function (err, nodeJSON)`, where `err` is an Error is the function fails and `nodeJSON` is a JSON representation of the dagNode.
+
+This method was introduced to add some convinience when dealing with formats that have a non practical structure. For formats like dag-cbor, you won't need to use it as the dagNode itself is already a JSON 1:1 mapping to the CBOR representation.
 
 ### Local resolver methods
 
