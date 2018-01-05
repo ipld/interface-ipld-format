@@ -80,7 +80,7 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 > get the CID of the dagNode
 
-`callback` must have the signature `function (err, cid)`, where `err` is an Error is the function fails and `cid` is a CID instance of the dagNode.
+`callback` must have the signature `function (err, cid)`, where `err` is an Error if the function fails and `cid` is a CID instance of the dagNode.
 
 ### Local resolver methods
 
