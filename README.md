@@ -101,7 +101,7 @@ Options include:
   - level: 0 to n - how many levels deep should the traversal go.
   - values: bool - resolve the values (defaults to false)
 
-`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`
+`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array depending on `options.value`. If it is `true` it is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`. If it is `false` it contains only the paths, such as `['/foo', '/bar', ...]`.
 
 #### `resolver.isLink(binaryBlob, path, callback)`
 
