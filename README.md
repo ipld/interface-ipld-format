@@ -17,7 +17,7 @@
   - [IPLD format utils](#ipld-format-utils)
     - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
     - [`util.deserialize(binaryBlob, callback)`](#utildeserializebinaryblob-callback)
-    - [`util.cid(dagNode[, options], callback)`](#utilciddagnode-callback)
+    - [`util.cid(binaryBlob[, options], callback)`](#utilciddagnode-callback)
     - [`util.toJSON(dagNode, callback)`](#utiltojsondagnode-callback)
   - [Local resolver methods](#local-resolver-methods)
     - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
