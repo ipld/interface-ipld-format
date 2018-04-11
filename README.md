@@ -98,10 +98,12 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 > returns all the paths available in this block.
 
 Options include:
-  - level: 0 to n - how many levels deep should the traversal go.
   - values: bool - resolve the values (defaults to false)
 
-`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array depending on `options.value`. If it is `true` it is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`. If it is `false` it contains only the paths, such as `['/foo', '/bar', ...]`.
+`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails. On success the `result` depends on `options.values`:
+
+  - if `true`: an object where the keys are the paths. If the path contains a slash, it becomes a nested object. An example would be a path `/author/email` with value `info@example.com` would become `{author: {email: "info@example.com"}}`.
+  - if `false`: a list that contains the paths as strings. For example `["/author/email", "/author/name", …]`.
 
 #### `resolver.isLink(binaryBlob, path, callback)`
 
