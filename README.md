@@ -17,7 +17,7 @@
   - [IPLD format utils](#ipld-format-utils)
     - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
     - [`util.deserialize(binaryBlob, callback)`](#utildeserializebinaryblob-callback)
-    - [`util.cid(dagNode, callback)`](#utilciddagnode-callback)
+    - [`util.cid(binaryBlob[, options], callback)`](#utilcidbinaryblob-options-callback)
   - [Local resolver methods](#local-resolver-methods)
     - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
     - [`resolver.tree(binaryBlob[, options], callback)`](#resolvertreebinaryblob-options-callback)
@@ -71,11 +71,15 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 `callback` must have the signature `function (err, dagNode)`, where `err` is an Error if the function fails and `dagNode` is the dagNode that got deserialized in the process.
 
-#### `util.cid(dagNode, callback)`
+#### `util.cid(binaryBlob[, options], callback)`
 
-> get the CID of the dagNode
+> get the CID of a binary blob
 
-`callback` must have the signature `function (err, cid)`, where `err` is an Error if the function fails and `cid` is a CID instance of the dagNode.
+Options include:
+  - version - the CID version to be used (defaults to 1)
+  - hashAlg - the hash algorithm to be used (default to the one set by the format)
+
+`callback` must have the signature `function (err, cid)`, where `err` is an Error if the function fails and `cid` is a CID instance of the binary blob.
 
 ### Local resolver methods
 
