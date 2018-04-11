@@ -103,18 +103,6 @@ Options include:
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array depending on `options.value`. If it is `true` it is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`. If it is `false` it contains only the paths, such as `['/foo', '/bar', ...]`.
 
-#### `resolver.isLink(binaryBlob, path, callback)`
-
-> returns an IPLD Link of a given path, if it is a valid link, false otherwise.
-
-`callback` must have the signature `function (err, link)`, where `err` is an Error if the function fails and `link` is the CID that was in a given path. `link` follows the format:
-
-```JavaScript
-{
-  '/': <cid>
-}
-```
-
 ## Maintainers
 
 Captain: [@diasdavid](https://github.com/diasdavid).
