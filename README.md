@@ -21,6 +21,8 @@
   - [Local resolver methods](#local-resolver-methods)
     - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
     - [`resolver.tree(binaryBlob[, options], callback)`](#resolvertreebinaryblob-options-callback)
+  - [Properties](#properties)
+    - [`multicodec`](#multicodec)
 - [Maintainers](#maintainers)
 - [Contribute](#contribute)
 - [License](#license)
@@ -95,6 +97,14 @@ Options include:
   - values: bool - resolve the values (defaults to false)
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array depending on `options.value`. If it is `true` it is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`. If it is `false` it contains only the paths, such as `['/foo', '/bar', ...]`.
+
+### Properties
+
+#### `multicodec`
+
+> Identifier for the format implementation
+
+The `multicodec` property is used to register a format implementation in IPLD. It needs to be one specified in the [Multicodec Table](https://github.com/multiformats/multicodec#multicodec-table).
 
 ## Maintainers
 
