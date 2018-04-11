@@ -22,6 +22,7 @@
     - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
     - [`resolver.tree(binaryBlob[, options], callback)`](#resolvertreebinaryblob-options-callback)
   - [Properties](#properties)
+    - [`defaultHashAlg`](#defaulthashalg)
     - [`multicodec`](#multicodec)
 - [Maintainers](#maintainers)
 - [Contribute](#contribute)
@@ -99,6 +100,12 @@ Options include:
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an array depending on `options.value`. If it is `true` it is an array of objects containing `path:value` tuples, such as: `[ { '/foo': 'bar' } ...]`. If it is `false` it contains only the paths, such as `['/foo', '/bar', ...]`.
 
 ### Properties
+
+#### `defaultHashAlg`
+
+> Default hash algorithm of the format
+
+Most formats have one specific hash algorithm, e.g. Bitcoin’s is `dbl-sha2-256`. CBOR can be used with any hash algorithm, though the default in the IPFS world is `sha256`. `defaultHashAlg` is used in the `util.cid()` call if no hash algorithm was given. The value of `defaultHashAlg` must be one defined in the [Multihash Table](https://github.com/multiformats/multihash#table-for-multihash-v100-rc-semver).
 
 #### `multicodec`
 
