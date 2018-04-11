@@ -52,16 +52,6 @@ Include this badge in your readme if you make a new module that implements inter
 
 A valid (read: that follows this interface) IPLD format implementation the following API.
 
-**Table of contents:**
-
-- IPLD format utils - Necessary by the main resolver
-  - `util.serialize`
-  - `util.deserialize`
-  - `util.cid`
-- Local resolver methods - the block level resolver (knows how to resolve paths at the block scope)
-  - `resolver.resolve`
-  - `resolver.tree`
-
 ### IPLD format utils
 
 #### `util.serialize(dagNode, callback)`
