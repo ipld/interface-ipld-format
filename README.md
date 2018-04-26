@@ -34,7 +34,10 @@ The primary goal of this module is to define an interface that IPLD formats can 
 - [JavaScript ipld-dag-pb](https://github.com/ipld/js-ipld-dag-pb)
 - [JavaScript ipld-dag-cbor](https://github.com/ipld/js-ipld-dag-cbor)
 - [JavaScript ipld-ethereum](https://github.com/ipld/js-ipld-ethereum)
-- [JavaScript ipld-bencode](https://github.com/ipld/js-ipld-bencode)
+- [JavaScript ipld-bitcoin](https://github.com/ipld/js-ipld-bitcoin)
+- [JavaScript ipld-zcash](https://github.com/ipld/js-ipld-zcash)
+- [JavaScript ipld-git](https://github.com/ipld/js-ipld-git)
+- [JavaScript ipld-raw](https://github.com/ipld/js-ipld-raw)
 
 Send in a PR if you find or write one!
 
