@@ -92,6 +92,27 @@ Options include:
 - value: <> - The value resolved or an IPLD link if it was unable to resolve it through.
 - remainderPath: <> - The remaining path that was not resolved under block scope.
 
+If `path` is the root `/`, the result is a nested object that contains all paths that `tree()` returns. The values are the same as accessing them directly with the full path. Example:
+
+`tree()` returns:
+
+```JSON
+["author/name", "author/email"]
+```
+
+`resolve(binaryblob, "/", callback)` would then have as a result:
+
+```JSON
+{
+  "author": {
+    "name": "vmx",
+    "email": "vmx@example.com"
+  }
+}
+```
+
+Numbers within a path are interpreted as an array.
+
 #### `resolver.tree(binaryBlob[, options], callback)`
 
 > returns all the paths available in this block.
