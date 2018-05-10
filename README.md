@@ -114,12 +114,9 @@ If `path` is the root `/`, the result is a nested object that contains all paths
 
 Numbers within a path are interpreted as an array.
 
-#### `resolver.tree(binaryBlob[, options], callback)`
+#### `resolver.tree(binaryBlob, callback)`
 
 > returns all the paths available in this block.
-
-Options include:
-  - level: 0 to n - how many levels deep should the traversal go.
 
 `callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is a list of path such as `["/foo", "/bar", "/author/name", ...]`.
 
