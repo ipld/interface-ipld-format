@@ -20,7 +20,7 @@
     - [`util.cid(binaryBlob[, options], callback)`](#utilcidbinaryblob-options-callback)
   - [Local resolver methods](#local-resolver-methods)
     - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
-    - [`resolver.tree(binaryBlob[, options], callback)`](#resolvertreebinaryblob-options-callback)
+    - [`resolver.tree(binaryBlob, callback)`](#resolvertreebinaryblob-callback)
   - [Properties](#properties)
     - [`defaultHashAlg`](#defaulthashalg)
     - [`multicodec`](#multicodec)
