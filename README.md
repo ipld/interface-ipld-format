@@ -15,12 +15,12 @@
 - [Definitions](#definitions)
 - [API](#api)
   - [IPLD format utils](#ipld-format-utils)
-    - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
-    - [`util.deserialize(binaryBlob, callback)`](#utildeserializebinaryblob-callback)
-    - [`util.cid(binaryBlob[, options], callback)`](#utilcidbinaryblob-options-callback)
+    - [`util.serialize(dagNode)`](#utilserializedagnode)
+    - [`util.deserialize(binaryBlob)`](#utildeserializebinaryblob)
+    - [`util.cid(binaryBlob[, options])`](#utilcidbinaryblob-options)
   - [Local resolver methods](#local-resolver-methods)
-    - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
-    - [`resolver.tree(binaryBlob, callback)`](#resolvertreebinaryblob-callback)
+    - [`resolver.resolve(binaryBlob, path)`](#resolverresolvebinaryblob-path)
+    - [`resolver.tree(binaryBlob)`](#resolvertreebinaryblob)
   - [Properties](#properties)
     - [`defaultHashAlg`](#defaulthashalg)
     - [`multicodec`](#multicodec)
@@ -60,19 +60,19 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 
 ### IPLD format utils
 
-#### `util.serialize(dagNode, callback)`
+#### `util.serialize(dagNode)`
 
 > serializes a dagNode of an IPLD format into its binary format
 
-`callback` must have the signature `function (err, binaryBlob)`, where `err` is an Error is the function fails and `binaryBlob` is a Buffer containing the serialized version.
+Returns a `Promise<Buffer>`, where `Buffer` contains the serialized version.
 
-#### `util.deserialize(binaryBlob, callback)`
+#### `util.deserialize(binaryBlob)`
 
 > deserializes a binary blob into the instance
 
-`callback` must have the signature `function (err, dagNode)`, where `err` is an Error if the function fails and `dagNode` is the dagNode that got deserialized in the process.
+Returns a `Promise<dagNode>`, where `dagNode` is the dagNode that got deserialized in the process.
 
-#### `util.cid(binaryBlob[, options], callback)`
+#### `util.cid(binaryBlob[, options])`
 
 > get the CID of a binary blob
 
@@ -80,15 +80,15 @@ Options include:
   - version - the CID version to be used (defaults to 1)
   - hashAlg - the hash algorithm to be used (default to the one set by the format)
 
-`callback` must have the signature `function (err, cid)`, where `err` is an Error if the function fails and `cid` is a CID instance of the binary blob.
+Returns `Promise<CID>`, where `CUD` is the instance of the binary blob.
 
 ### Local resolver methods
 
-#### `resolver.resolve(binaryBlob, path, callback)`
+#### `resolver.resolve(binaryBlob, path)`
 
 > resolves a path in block, returns the value and or a link and the partial missing path. This way the IPLD Resolver can fetch the link and continue to resolve.
 
-`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an object with the following keys:
+Returns `Promise<Object>`, where the `Object` contains the following keys:
 
 - value: <> - The value resolved or an IPLD link if it was unable to resolve it through.
 - remainderPath: <> - The remaining path that was not resolved under block scope.
@@ -114,11 +114,11 @@ If `path` is the root `/`, the result is a nested object that contains all paths
 
 Numbers within a path are interpreted as an array.
 
-#### `resolver.tree(binaryBlob, callback)`
+#### `resolver.tree(binaryBlob)`
 
 > returns all the paths available in this block.
 
-`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is a list of path such as `["/foo", "/bar", "/author/name", ...]`.
+Returns `Promise<Array>`, where the array is the list of paths such as `["/foo", "/bar", "/author/name", ...]`.
 
 ### Properties
 
