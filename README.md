@@ -58,81 +58,101 @@ Include this badge in your readme if you make a new module that implements inter
 
 A valid (read: that follows this interface) IPLD format implementation the following API.
 
-### IPLD format utils
+IPLD Format APIs are restricted to a single IPLD Node, they never access any linked IPLD Nodes.
 
-#### `util.serialize(dagNode, callback)`
 
-> serializes a dagNode of an IPLD format into its binary format
+### serialize(IpldNode)
 
-`callback` must have the signature `function (err, binaryBlob)`, where `err` is an Error is the function fails and `binaryBlob` is a Buffer containing the serialized version.
+> Serializes the internal representation of an IPLD Node into a binary blob.
 
-#### `util.deserialize(binaryBlob, callback)`
+`IpldNode` is a previously deserialized binary Block.
 
-> deserializes a binary blob into the instance
+Returns a Promise containing a `Buffer` with the serialized version of the given IPLD Node.
 
-`callback` must have the signature `function (err, dagNode)`, where `err` is an Error if the function fails and `dagNode` is the dagNode that got deserialized in the process.
 
-#### `util.cid(binaryBlob[, options], callback)`
+### deserialize(binaryBlob)
 
-> get the CID of a binary blob
+> Deserialize into internal representation.
 
-Options include:
-  - version - the CID version to be used (defaults to 1)
-  - hashAlg - the hash algorithm to be used (default to the one set by the format)
+The result is a JavaScript object, which may also be a Proxy object in case the data shouldn’t be deserialized as a whole. Its fields are the public API that can be resolved through. It’s up to the format to add convenient methods for manipulating the data. The returned object may also be a Proxy object in case the data shouldn’t be deserialized as a whole.
 
-`callback` must have the signature `function (err, cid)`, where `err` is an Error if the function fails and `cid` is a CID instance of the binary blob.
+Returns a Promise containing the Javascript object. This object must be able to be serialized with a `serialize()` call.
 
-### Local resolver methods
 
-#### `resolver.resolve(binaryBlob, path, callback)`
+### cid(binaryBlob, [options])
 
-> resolves a path in block, returns the value and or a link and the partial missing path. This way the IPLD Resolver can fetch the link and continue to resolve.
+> Return the CID of the binary blob.
 
-`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is an object with the following keys:
+Possible `options` are:
+  - `version` (`number`, default: 1): the CID version to be used
+  - `hashAlg` (`Multicodec`, default: the one the format specifies): the hash algorithm to be used
 
-- value: <> - The value resolved or an IPLD link if it was unable to resolve it through.
-- remainderPath: <> - The remaining path that was not resolved under block scope.
+This can be used to verify that some data actually has a certain CID.
 
-If `path` is the root `/`, the result is a nested object that contains all paths that `tree()` returns. The values are the same as accessing them directly with the full path. Example:
 
-`tree()` returns:
+### toJSON(IpldNode)
 
-```JSON
-["author/name", "author/email"]
+> Converts an IPLD Node into a JavaScript object that contains only basic types.
+
+Returns a JavaScript object that can be used as input for `JSON.stringify()`. It is *not* a goal to have a JSON representation that is roundtripable back into an IPLD Node. It is meant as a representation that can be processed by third party consumers.
+
+The [IPLD Data Model](https://github.com/ipld/specs/blob/master/IPLD-Data-Model-v1.md) defines two special types that need special attention when converting to JSON:
+  - Binary: the binary data is transformed into a Base64 encoded string.
+  - Links: the links are CID objects. Consumers of this JSON shouldn’t need to have their own CID parsing implementation, hence the CID is provided in its original base encoded format as well as the human readable one.
+
+Example with [dag-cbor](https://github.com/ipld/js-ipld-dag-cbor):
+
+```JavaScript
+'use strict'
+
+const CID = require('cids')
+const ipldDagCbor = require('ipld-dag-cbor')
+
+const input = {
+  binary: Buffer.from('1155fa3c', 'hex'),
+  link: new CID('zdpuAxdeot12gCeKJxANaDAL2juLQDB2QK4PFKnnxdAJLpAZf')
+}
+
+const serialized = await ipldDagCbor.serialize(input)
+const ipldNode = await ipldDagCbor.deserialize(serialized)
+const json = ipldDagCbor.toJSON(ipldNode)
+console.log(JSON.stringify(json, null, 2))
 ```
 
-`resolve(binaryblob, "/", callback)` would then have as a result:
+The output is:
 
 ```JSON
 {
-  "author": {
-    "name": "vmx",
-    "email": "vmx@example.com"
+  "binary": "EVX6PA==",
+  "link": {
+    "cid": "bafyreifvnutjz6sgkym5cw3fw5e2opfew2gy5dw4wui4tzpphylbmmjsci",
+    "multibase": "base32",
+    "version": 1,
+    "multicodec": "dag-cbor",
+    "multihash": {
+      "name": "sha2-256",
+      "bits": 256,
+      "digest": "b56d269cfa465619d15b65b749a73ca4b68d8e8edcb511c9e5ef3e1616313212"
+    }
   }
 }
 ```
 
-Numbers within a path are interpreted as an array.
-
-#### `resolver.tree(binaryBlob, callback)`
-
-> returns all the paths available in this block.
-
-`callback` must have the signature `function (err, result)`, where `err` is an Error if the function fails and `result` is a list of path such as `["/foo", "/bar", "/author/name", ...]`.
 
 ### Properties
 
-#### `defaultHashAlg`
+#### `defaultHashCode`
 
-> Default hash algorithm of the format
+> Default hash algorithm of the format,
 
-Most formats have one specific hash algorithm, e.g. Bitcoin’s is `dbl-sha2-256`. CBOR can be used with any hash algorithm, though the default in the IPFS world is `sha256`. `defaultHashAlg` is used in the `util.cid()` call if no hash algorithm was given. The value of `defaultHashAlg` must be one defined in the [Multihash Table](https://github.com/multiformats/multihash#table-for-multihash-v100-rc-semver).
+Most formats have one specific hash algorithm, e.g. Bitcoin’s is `dbl-sha2-256`. CBOR can be used with any hash algorithm, though the default in the IPFS world is `sha256`. `defaultHashAlg` is used in the `cid()` call if no hash algorithm is given. The value of `defaultHashAlg` must be one code defined in the [Multihash Table](https://github.com/multiformats/multihash#table-for-multihash).
 
-#### `multicodec`
+#### `codec`
 
-> Identifier for the format implementation
+> Identifier for the format implementation.
 
-The `multicodec` property is used to register a format implementation in IPLD. It needs to be one specified in the [Multicodec Table](https://github.com/multiformats/multicodec#multicodec-table).
+The `codec` property is used to register a format implementation in IPLD. It needs to be one of the codes specified in the [Multicodec Table](https://github.com/multiformats/multicodec#multicodec-table).
+
 
 ## Maintainers
 
