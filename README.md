@@ -92,17 +92,17 @@ This can be used to verify that some data actually has a certain CID.
 
 ### Properties
 
-#### `defaultHashCode`
+#### `defaultHashAlg`
 
 > Default hash algorithm of the format,
 
-Most formats have one specific hash algorithm, e.g. Bitcoin’s is `dbl-sha2-256`. CBOR can be used with any hash algorithm, though the default in the IPFS world is `sha256`. `defaultHashAlg` is used in the `cid()` call if no hash algorithm is given. The value of `defaultHashAlg` must be one code defined in the [Multihash Table](https://github.com/multiformats/multihash#table-for-multihash).
+Most formats have one specific hash algorithm, e.g. Bitcoin’s is `dbl-sha2-256`. CBOR can be used with any hash algorithm, though the default in the IPFS world is `sha256`. `defaultHashAlg` is used in the `cid()` call if no hash algorithm is given. The value of `defaultHashAlg` is of type `Multicodec` must be one code defined in the [Multihash Table](https://github.com/multiformats/multihash#table-for-multihash).
 
-#### `codec`
+#### `format`
 
 > Identifier for the format implementation.
 
-The `codec` property is used to register a format implementation in IPLD. It needs to be one of the codes specified in the [Multicodec Table](https://github.com/multiformats/multicodec#multicodec-table).
+The `format` property of type `Multicodec` is used to register a format implementation in IPLD. It needs to be one of the codes specified in the [Multicodec Table](https://github.com/multiformats/multicodec#multicodec-table).
 
 
 ## Maintainers
