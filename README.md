@@ -90,55 +90,6 @@ Possible `options` are:
 This can be used to verify that some data actually has a certain CID.
 
 
-### toJSON(IpldNode)
-
-> Converts an IPLD Node into a JavaScript object that contains only basic types.
-
-Returns a JavaScript object that can be used as input for `JSON.stringify()`. It is *not* a goal to have a JSON representation that is roundtripable back into an IPLD Node. It is meant as a representation that can be processed by third party consumers.
-
-The [IPLD Data Model](https://github.com/ipld/specs/blob/master/IPLD-Data-Model-v1.md) defines two special types that need special attention when converting to JSON:
-  - Binary: the binary data is transformed into a Base64 encoded string.
-  - Links: the links are CID objects. Consumers of this JSON shouldn’t need to have their own CID parsing implementation, hence the CID is provided in its original base encoded format as well as the human readable one.
-
-Example with [dag-cbor](https://github.com/ipld/js-ipld-dag-cbor):
-
-```JavaScript
-'use strict'
-
-const CID = require('cids')
-const ipldDagCbor = require('ipld-dag-cbor')
-
-const input = {
-  binary: Buffer.from('1155fa3c', 'hex'),
-  link: new CID('zdpuAxdeot12gCeKJxANaDAL2juLQDB2QK4PFKnnxdAJLpAZf')
-}
-
-const serialized = await ipldDagCbor.serialize(input)
-const ipldNode = await ipldDagCbor.deserialize(serialized)
-const json = ipldDagCbor.toJSON(ipldNode)
-console.log(JSON.stringify(json, null, 2))
-```
-
-The output is:
-
-```JSON
-{
-  "binary": "EVX6PA==",
-  "link": {
-    "cid": "bafyreifvnutjz6sgkym5cw3fw5e2opfew2gy5dw4wui4tzpphylbmmjsci",
-    "multibase": "base32",
-    "version": 1,
-    "multicodec": "dag-cbor",
-    "multihash": {
-      "name": "sha2-256",
-      "bits": 256,
-      "digest": "b56d269cfa465619d15b65b749a73ca4b68d8e8edcb511c9e5ef3e1616313212"
-    }
-  }
-}
-```
-
-
 ### Properties
 
 #### `defaultHashCode`
