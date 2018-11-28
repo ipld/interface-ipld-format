@@ -14,16 +14,12 @@
   - [Badge](#badge)
 - [Definitions](#definitions)
 - [API](#api)
-  - [IPLD format utils](#ipld-format-utils)
-    - [`util.serialize(dagNode, callback)`](#utilserializedagnode-callback)
-    - [`util.deserialize(binaryBlob, callback)`](#utildeserializebinaryblob-callback)
-    - [`util.cid(binaryBlob[, options], callback)`](#utilcidbinaryblob-options-callback)
-  - [Local resolver methods](#local-resolver-methods)
-    - [`resolver.resolve(binaryBlob, path, callback)`](#resolverresolvebinaryblob-path-callback)
-    - [`resolver.tree(binaryBlob, callback)`](#resolvertreebinaryblob-callback)
+  - [`serialize(IpldNode)`](#serializeipldnode)
+  - [`deserialize(binaryBlob)`](#deserializebinaryblob)
+  - [`cid(binaryBlob, [options])`](#cidbinaryblob-options)
   - [Properties](#properties)
     - [`defaultHashAlg`](#defaulthashalg)
-    - [`multicodec`](#multicodec)
+    - [`format`](#format)
 - [Maintainers](#maintainers)
 - [Contribute](#contribute)
 - [License](#license)
@@ -61,7 +57,7 @@ A valid (read: that follows this interface) IPLD format implementation the follo
 IPLD Format APIs are restricted to a single IPLD Node, they never access any linked IPLD Nodes.
 
 
-### serialize(IpldNode)
+### `serialize(IpldNode)`
 
 > Serializes the internal representation of an IPLD Node into a binary blob.
 
@@ -70,7 +66,7 @@ IPLD Format APIs are restricted to a single IPLD Node, they never access any lin
 Returns a Promise containing a `Buffer` with the serialized version of the given IPLD Node.
 
 
-### deserialize(binaryBlob)
+### `deserialize(binaryBlob)`
 
 > Deserialize into internal representation.
 
@@ -79,7 +75,7 @@ The result is a JavaScript object, which may also be a Proxy object in case the 
 Returns a Promise containing the Javascript object. This object must be able to be serialized with a `serialize()` call.
 
 
-### cid(binaryBlob, [options])
+### `cid(binaryBlob, [options])`
 
 > Return the CID of the binary blob.
 
