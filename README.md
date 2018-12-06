@@ -77,13 +77,15 @@ Returns a Promise containing the Javascript object. This object must be able to 
 
 ### `cid(binaryBlob, [options])`
 
-> Return the CID of the binary blob.
+> Calculate the CID of the binary blob.
 
 Possible `options` are:
   - `version` (`number`, default: 1): the CID version to be used
   - `hashAlg` (`Multicodec`, default: the one the format specifies): the hash algorithm to be used
 
 This can be used to verify that some data actually has a certain CID.
+
+Returns a Promise containing the calculated CID of the given binary blob.
 
 
 ### Properties
