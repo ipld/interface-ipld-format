@@ -72,6 +72,8 @@ Returns a Promise containing a `Buffer` with the serialized version of the given
 
 The result is a JavaScript object, which may also be a Proxy object in case the data shouldn’t be deserialized as a whole. Its fields are the public API that can be resolved through. It’s up to the format to add convenient methods for manipulating the data. The returned object may also be a Proxy object in case the data shouldn’t be deserialized as a whole.
 
+All enumerable properties (the ones that are returned by a `Object.keys()` call) of the deserialized object are considered for resolving IPLD Paths. They must only return values whose type is one of the [IPLD Data Model](https://github.com/ipld/specs/blob/master/IPLD-Data-Model-v1.md).
+
 Returns a Promise containing the Javascript object. This object must be able to be serialized with a `serialize()` call.
 
 
