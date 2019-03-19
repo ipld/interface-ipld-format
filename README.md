@@ -48,7 +48,7 @@ Include this badge in your readme if you make a new module that implements inter
 
 ## Definitions
 
-- **dagNode**: The implementation specific representation of a deserialized block.
+- **dagNode**: The implementation specific representation of a deserialized blob.
 
 ## API
 
@@ -61,7 +61,7 @@ IPLD Format APIs are restricted to a single IPLD Node, they never access any lin
 
 > Serializes the internal representation of an IPLD Node into a binary blob.
 
-`IpldNode` is a previously deserialized binary Block.
+`IpldNode` is a previously deserialized binary blob.
 
 Returns a Promise containing a `Buffer` with the serialized version of the given IPLD Node.
 
