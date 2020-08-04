@@ -68,7 +68,7 @@ IPLD Format APIs are restricted to a single IPLD Node, they never access any lin
 
 `IpldNode` is a previously deserialized binary blob.
 
-Returns an [Uint8Array] with the serialized version of the given IPLD Node.
+Returns a [Uint8Array] with the serialized version of the given IPLD Node.
 
 #### `util.deserialize(binaryBlob)`
 
