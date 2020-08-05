@@ -1,4 +1,4 @@
-# interface-ipld-format
+# interface-ipld-format <!-- omit in toc -->
 
 [![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](http://ipn.io)
 [![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg?style=flat-square)](http://webchat.freenode.net/?channels=%23ipfs)
@@ -7,7 +7,7 @@
 
 > A interface you can follow to implement a valid IPLD format, resolvable through the IPLD Resolver (available in IPFS)
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 
 - [Background](#background)
   - [Modules that implement the interface](#modules-that-implement-the-interface)
@@ -68,7 +68,7 @@ IPLD Format APIs are restricted to a single IPLD Node, they never access any lin
 
 `IpldNode` is a previously deserialized binary blob.
 
-Returns an `Buffer` with the serialized version of the given IPLD Node.
+Returns a [Uint8Array] with the serialized version of the given IPLD Node.
 
 #### `util.deserialize(binaryBlob)`
 
@@ -167,3 +167,4 @@ Small note: If editing the README, please conform to the [standard-readme](https
 This repository is only for documents. These are licensed under a [CC-BY 3.0 Unported](LICENSE) License © 2016 Protocol Labs Inc. Any code is licensed under a [MIT](MIT-LICENSE) © 2016 Protocol Labs Inc.
 
 [UnixFS]: https://github.com/ipfs/specs/tree/master/unixfs
+[Uint8Array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
