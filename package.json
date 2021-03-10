@@ -1,0 +1,25 @@
+{
+  "name": "interface-ipld-format",
+  "version": "0.0.0",
+  "description": "IPLD format",
+  "main": "index.js",
+  "types": "./types.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipld/interface-ipld-format.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ipld/interface-ipld-format/issues"
+  },
+  "homepage": "https://github.com/ipld/interface-ipld-format#readme",
+  "dependencies": {
+    "cids": "^1.1.6",
+    "multicodec": "^3.0.1",
+    "multihashes": "^4.0.2"
+  }
+}
