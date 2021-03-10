@@ -12,13 +12,13 @@ export interface Format<T> {
   defaultHashAlg: Multihashes.HashCode
 
   util: {
-    serialize (ipldNode: T) : Promise<Uint8Array>
-    deserialize (binaryBlob: Uint8Array) : Promise<T>
+    serialize (ipldNode: T) : Uint8Array
+    deserialize (binaryBlob: Uint8Array) : T
     cid (binaryBlob: Uint8Array, options: { }) : Promise<CID>
   }
 
   resolver: {
-    resolve (binaryBlob: Uint8Array, path: string) : Promise<{ value: any, remainderPath?: string }>
-    tree (binaryBlob: Uint8Array) : AsyncGenerator<string, void, undefined>
+    resolve (binaryBlob: Uint8Array, path: string) : { value: any, remainderPath?: string }
+    tree (binaryBlob: Uint8Array) : Generator<string, void, undefined>
   }
 }
