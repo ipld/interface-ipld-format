@@ -3,8 +3,8 @@ import Multihashes from 'multihashes'
 import Multicodec from 'multicodec'
 
 export interface CIDOptions {
-  cidVersion: CID.CIDVersion,
-  hashAlg: Multihashes.HashCode
+  cidVersion?: CID.CIDVersion,
+  hashAlg?: Multihashes.HashCode
 }
 
 export interface Format<T> {
@@ -14,7 +14,7 @@ export interface Format<T> {
   util: {
     serialize (ipldNode: T) : Uint8Array
     deserialize (binaryBlob: Uint8Array) : T
-    cid (binaryBlob: Uint8Array, options: { }) : Promise<CID>
+    cid (binaryBlob: Uint8Array, options?: CIDOptions) : Promise<CID>
   }
 
   resolver: {
