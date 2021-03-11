@@ -1,6 +1,6 @@
 {
   "name": "interface-ipld-format",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "IPLD format",
   "main": "index.js",
   "types": "./types.d.ts",
