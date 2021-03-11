@@ -18,7 +18,7 @@ export interface Format<T> {
   }
 
   resolver: {
-    resolve (binaryBlob: Uint8Array, path: string) : { value: any, remainderPath?: string }
+    resolve (binaryBlob: Uint8Array, path: string) : { value: any, remainderPath: string }
     tree (binaryBlob: Uint8Array) : Generator<string, void, undefined>
   }
 }
